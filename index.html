@@ -8,6 +8,7 @@
     <title>Clasificación de flores.</title>
     <link rel="shortcut icon" href="/flowers_v2_web/imagen/flor.jpg">
     <link href="style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
@@ -15,31 +16,61 @@
 <body>
 
     <main>
-        <div class="px-4 py-2 my-2 text-center border-bottom">
+        <div class="cont">
             <h1 class="display-5 fw-bold mb-sm-1">Tipos de Flores</h1>
-            <div class="col-lg-12 mx-auto">
-                <p class="mt-md-4 mb-sm-0">Clasificación de flores usando la cámara web utilizando Tensorflow.js, para este caso solo clasificamos 5 tipos de flores: margaritas,dientes de león,rosas,girasoles y tulipanes.</p>
-                <p class="mb-sm-0"><b>Indicaciones:</b> aceptar que el navegador pueda usar la cámara, ajustar la cámara al objetivo en este caso flor y pulsar el botón de obtener resultados, dicho resultado aparecerá debajo del botón.</p>
+            <button class="btn btn-primary mt-md-1" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                style="margin-left: 80%; position: absolute;"><svg xmlns="http://www.w3.org/2000/svg" width="15"
+                    height="15" fill="currentColor" class="bi bi-info-circle-fill" viewBox="0 0 16 16">
+                    <path
+                        d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z" />
+                </svg></button>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Información</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <b  class="modal-title">Descripción:</b><br>
+                        Clasificación de flores usando la cámara web utilizando Tensorflow.js, para este caso solo
+                        clasificamos 5 tipos de flores: margaritas,dientes de león,rosas,girasoles y
+                        tulipanes.<br><br>
+                        <b  class="modal-title">Indicaciones:</b><br>
+                        <ol>
+                            <li>Aceptar que el navegador pueda usar la cámara.</li>
+                            <li>Ajustar la cámara al
+                                objetivo en este caso flor y pulsar el botón de obtener resultados.</li>
+                            <li>Dicho resultado aparecerá debajo del botón.</li>
+                        </ol>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="b-example-divider"></div>
+        <hr>
 
         <div class="container mt-4">
             <div class="row">
                 <div class="col-12 col-md-4 offset-md-4 text-center">
                     <video id="video" playsinline autoplay style="width: 1px;"></video>
-                    <button class="btn btn-primary mb-lg-3" id="cambiar-camara" style="margin-bottom: 7%;" onclick="cambiarCamara();">Cambiar
+                    <button class="btn btn-primary mb-lg-3" id="cambiar-camara" style="margin-bottom: 7%;"
+                        onclick="cambiarCamara();">Cambiar
                         camara</button>
+                        <button class="btn btn-primary  mb-lg-3" id="btn-request"
+                        style=" margin-bottom: 7%;">Obtener resultado</button>
                     <canvas id="canvas" width="400" height="400" style="max-width: 100%;"></canvas>
-                    <canvas id="othercanvas" width="200" height="200" style="display: none"></canvas>
-                    <button class="btn btn-primary mt-lg-3" id="btn-request" style="margin-top: 3%; margin-left: 4.8%;">Obtener resultado</button>
-                    <div class="text-center mt-lg-3" id="resultado"></div>
+                    <canvas id="othercanvas" width="200" height="200" style="display: none"></canvas>  
+                    <p class="cont" style="font-size: 50px;margin-top: 10%; margin-left: 3%;" id="resultado"></p>
                 </div>
-                
+
             </div>
         </div>
-        
+        <br><br>
+
     </main>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"

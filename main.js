@@ -107,7 +107,7 @@ function predecir() {
 
         let possible_results = ['Margarita', 'Diente de león', 'Rosa', 'Girasol', 'Tulipán']
         console.log("Prediccion", resultados[mayorIndice]);
-        document.getElementById("resultado").innerHTML = '<h1>'+possible_results[mayorIndice]+'</h1>';
+        document.getElementById("resultado").textContent = possible_results[mayorIndice];
     }
     //setTimeout(predecir, 200); llamada recursiva en caso de querer predecir al encender la cámara aunque no haya nada.
 
