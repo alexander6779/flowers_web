@@ -4,11 +4,18 @@
     text-align: center;
 }
 
-.canvas-container {
+.canv {
     margin: 0 auto;
     border: 1px solid #ccc;
 }
+
 .cont {
     display: grid;
     place-items: center;
+}
+
+.graphic-chart {
+    display: none; 
+    margin-left: 1%;
+    margin-bottom: 2%;
 }

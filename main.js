@@ -1,30 +1,71 @@
 //Tomar y configurar el canvas
 var canvas = document.getElementById("canvas");
 var video = document.getElementById("video");
-let btn_req  = document.getElementById('btn-request');
+let btn_req = document.getElementById('btn-request');
 var ctx = canvas.getContext("2d");
 var modelo = null;
 var size = 400;
 var camaras = [];
-
+const ctx_chart = document.getElementById('myChart');
+let possible_results = ['Margarita', 'Diente de león', 'Rosa', 'Girasol', 'Tulipán'];
+let accuracies = [];
 var currentStream = null;
+let isChart = false;
+let chart = null;
 var facingMode = "user"; //Para que funcione con el celular (user/environment)
 
+// async funtion to load the model from the json file
 (async () => {
     console.log("Cargando modelo...");
     modelo = await tf.loadLayersModel("/flowers_v2_web/model.json");
     console.log("Modelo cargado...");
 })();
 
+// when you load the web it will show the camera. 
 window.onload = function () {
     mostrarCamara();
 }
 
-btn_req.addEventListener('click',function(){
+// function to create the graphic
+function createChart() {
+    if(isChart){
+        chart.destroy();
+    }
+    chart = new Chart(ctx_chart, {
+        type: "pie",
+        data: {
+            labels: possible_results,
+            datasets: [{
+                backgroundColor: [
+                    '#822FCB ',
+                    '#F0E130',
+                    '#EF476F',
+                    '#FFB400',
+                    '#FF878D',
+                ],
+                data: accuracies
+            }]
+        },
+        options: {
+            responsive: true,
+            title: {
+                display: true,
+                text: "Precisiones"
+            }
+        }
+    });
+}
+
+// when you click the buttin obtener resultados it will predict and show the results with an h1 tag
+// and also a pie chart with all the accuracies.
+btn_req.addEventListener('click', function () {
     predecir();
+    ctx_chart.parentNode.style.display = "block";
+    createChart()
+    isChart=true;
 })
 
-
+// función para mostrar la cámara en la web
 function mostrarCamara() {
 
     var opciones = {
@@ -50,7 +91,7 @@ function mostrarCamara() {
         alert("No existe la funcion getUserMedia... oops :( no se puede usar la camara");
     }
 }
-
+// Función para cambiar la cámara del móvil
 function cambiarCamara() {
     if (currentStream) {
         currentStream.getTracks().forEach(track => {
@@ -78,6 +119,7 @@ function cambiarCamara() {
         })
 }
 
+// funtion to predict with model
 function predecir() {
     if (modelo != null) {
         //Pasar canvas a version 200x200
@@ -104,9 +146,7 @@ function predecir() {
         var tensor4 = tf.tensor4d(arr);
         var resultados = modelo.predict(tensor4).dataSync();
         var mayorIndice = resultados.indexOf(Math.max.apply(null, resultados));
-
-        let possible_results = ['Margarita', 'Diente de león', 'Rosa', 'Girasol', 'Tulipán']
-        console.log("Prediccion", resultados[mayorIndice]);
+        accuracies = structuredClone(resultados)
         document.getElementById("resultado").textContent = possible_results[mayorIndice];
     }
     //setTimeout(predecir, 200); llamada recursiva en caso de querer predecir al encender la cámara aunque no haya nada.
