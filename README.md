@@ -1,12 +1,9 @@
-# flowers_v2_web
-Web para el proyecto de las flores, dónde con una foto a tiempo real predice uno de los 5 tipos de flores con los que entrenamos el modelo.
-Enlace:
-https://alexander6779.github.io/flowers_v2_web/
-
-
 # Proyecto de Fin de Curso - Identificador de Flores
 
 Bienvenido/a al Proyecto de Fin de Curso - Identificador de Flores. Este proyecto te permite explorar el emocionante mundo de la visión por computadora y la inteligencia artificial al identificar flores a partir de imágenes capturadas en tiempo real con la cámara. Con un enfoque amigable y accesible, podrás descubrir qué tipo de flor estás observando entre tulipanes, girasoles, dientes de león, rosas y margaritas.
+
+## Enlace:
+https://alexander6779.github.io/flowers_v2_web/
 
 ## Características Destacadas
 
